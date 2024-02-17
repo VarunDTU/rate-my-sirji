@@ -16,18 +16,57 @@ export async function GetUniversityById(UniversityId) {
     .select("courses,name,department,id")
     .eq("university_code", UniversityId);
 
-  return { data: data, Professors: Professors.data };
+  return {
+    UniversityId: UniversityId,
+    data: data,
+    Professors: Professors.data,
+  };
 }
 export async function GetProfessorById(ProfessorsId) {
   "use server";
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { data } = await supabase
-    .from("full_reviews")
+    .from("professor_reviewss")
     .select()
-    .eq("professor", ProfessorsId);
+    .eq("id", ProfessorsId);
 
   return { data };
+}
+export async function AddReview(ProfessorsId, review) {
+  "use server";
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const user = await getUser();
+  const data = await supabase.from("Reviews").insert({
+    professor: ProfessorsId,
+    ...review,
+    user_id: parseInt(user.data[0].id),
+  });
+  //console.log(data);
+  return data;
+}
+export async function AddProfessor(ProfessorData) {
+  "use server";
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const user = await getUser();
+  const user_id = await supabase
+    .from("users")
+    .select("id")
+    .eq("user_id", user.user.id);
+
+  var professorCourses = [];
+
+  ProfessorData.created_by = user_id.data[0].id;
+  professorCourses.concat(await supabase.from("professor").select("courses"));
+  professorCourses.push(ProfessorData.course);
+  ProfessorData.courses = professorCourses;
+  const data = await supabase.from("professor").insert({
+    ...ProfessorData,
+  });
+  console.log(data);
+  return data;
 }
 
 export const getUser = async () => {

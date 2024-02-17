@@ -45,3 +45,13 @@ export function MukStars() {
     </span>
   );
 }
+ export const createInputs = (count) => {
+   let arr = [];
+   for (let i = 0; i < count; i++) {
+     arr.push(<GoldStars />);
+   }
+   for (let i = 0; i < 5 - count; i++) {
+     arr.push(<MukStars />);
+   }
+   return arr;
+ };

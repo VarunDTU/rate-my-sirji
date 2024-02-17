@@ -9,7 +9,7 @@ export default function UniversitySearch() {
     const newSearchList = SchoolList.filter(
       (words) => RegExp(inputString, "gmi").test(words.University) == true
     );
-    console.log(SearchList);
+
     setSearchList(newSearchList);
   }
 

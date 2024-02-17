@@ -1,55 +1,127 @@
 "use client";
+import Link from "next/link";
 export default function ProfileSection(props) {
-  console.log(props);
+  const professorInfo = props.data;
   return (
-    <div className="text-3xl  items-stretch flex flex-col  font-bold m-4 p-2">
-      <div className=" w-1/2">
-        <h1>{props.professor_name}</h1>
-      </div>
-      <div>
-        <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-          <div className="grid items-center lg:grid-cols-12 gap-6 lg:gap-12">
-            <div className="lg:col-span-4">
-              <div className="lg:pe-6 xl:pe-12">
-                <p className="text-6xl font-bold leading-10 text-blue-600">
-                  92%
-                  <span className="ms-1 inline-flex items-center gap-x-1 bg-gray-200 font-medium text-gray-800 text-xs leading-4 rounded-full py-0.5 px-2 dark:bg-gray-800 dark:text-gray-300">
-                    <svg
-                      className="flex-shrink-0 w-4 h-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
-                    </svg>
-                    +7% this month
-                  </span>
-                </p>
-                <p className="mt-2 sm:mt-3 text-gray-500">
-                  of U.S. adults have bought from businesses using Space
-                </p>
-              </div>
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="lg:w-3/4">
+          <h2 class="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
+            {professorInfo?.professor_name}
+          </h2>
+          <p class="mt-3 text-gray-800 dark:text-gray-400">
+            {professorInfo?.department}
+          </p>
+          <p class="mt-5">
+            <Link
+              class="inline-flex items-center gap-x-1 font-medium text-blue-600 dark:text-blue-500"
+              href={`createReview?id=${professorInfo?.id}`}
+            >
+              Add a review
+              <svg
+                class="flex-shrink-0 w-4 h-4 transition ease-in-out group-hover:translate-x-1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </Link>
+          </p>
+        </div>
+
+        <div class="space-y-6 lg:space-y-10">
+          <div class="flex">
+            <span class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+              <svg
+                class="flex-shrink-0 w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            </span>
+            <div class="ms-5 sm:ms-8">
+              <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+                Average Overall Rating
+              </h3>
+              <p class="mt-1 text-gray-600 dark:text-gray-400">
+                Our documentation and extensive Client libraries contain
+                everything a business needs to build a custom integration in a
+                fraction of the time.
+              </p>
             </div>
+          </div>
 
-            <div className="lg:col-span-8 relative lg:before:absolute lg:before:top-0 lg:before:-start-12 lg:before:w-px lg:before:h-full lg:before:bg-gray-200 lg:before:dark:bg-gray-700">
-              <div className="grid gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-3 sm:gap-8">
-                <div>
-                  <p className="text-3xl font-semibold text-blue-600">99.95%</p>
-                  <p className="mt-1 text-gray-500">in fulfilling orders</p>
-                </div>
+          <div class="flex">
+            <span class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+              <svg
+                class="flex-shrink-0 w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z" />
+                <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
+              </svg>
+            </span>
+            <div class="ms-5 sm:ms-8">
+              <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+                Average Difficulty Rating
+              </h3>
+              <p class="mt-1 text-gray-600 dark:text-gray-400">
+                We actively contribute to open-source projects—giving back to
+                the community through development, patches, and sponsorships.
+              </p>
+            </div>
+          </div>
 
-                <div>
-                  <p className="text-3xl font-semibold text-blue-600">2,000+</p>
-                  <p className="mt-1 text-gray-500">partner with Preline</p>
-                </div>
-
-                <div>
-                  <p className="text-3xl font-semibold text-blue-600">85%</p>
-                  <p className="mt-1 text-gray-500">this year alone</p>
-                </div>
-              </div>
+          <div class="flex">
+            <span class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm mx-auto dark:bg-slate-900 dark:border-gray-700 dark:text-gray-200">
+              <svg
+                class="flex-shrink-0 w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M7 10v12" />
+                <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
+              </svg>
+            </span>
+            <div class="ms-5 sm:ms-8">
+              <h3 class="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200">
+                Attendance
+              </h3>
+              <p class="mt-1 text-gray-600 dark:text-gray-400">
+                From boarding passes to movie tickets, there's pretty much
+                nothing you can't store with Preline.
+              </p>
             </div>
           </div>
         </div>

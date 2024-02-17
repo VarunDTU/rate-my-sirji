@@ -4,8 +4,12 @@ export default async function Page({ searchParams, params }) {
   const id = searchParams.id;
   const professorReviews = await GetProfessorById(id);
   return (
-    <div className="max-w-screen">
-      <Reviews reviews={professorReviews} id={searchParams.id}></Reviews>
+    <div className="min-w-screen">
+      <Reviews
+        className="min-w-screen"
+        reviews={professorReviews}
+        id={searchParams.id}
+      ></Reviews>
     </div>
   );
 }
